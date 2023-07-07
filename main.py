@@ -1,8 +1,8 @@
 from fastapi import FastAPI
+from fastapi_project.routes import (
+    orders,
+)  # Assuming orders.py is in the routes directory
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
+app.include_router(orders.router)
