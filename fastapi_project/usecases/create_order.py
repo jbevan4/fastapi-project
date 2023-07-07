@@ -1,35 +1,22 @@
-from fastapi_project.adapters.third_party_provider import ThirdPartyProviderAdapter
-from fastapi_project.domain.order import Order, Provider
+from fastapi_project.adapters import third_party_provider_selector
+from fastapi_project.domain.order import Order
 from fastapi_project.repositories.in_memory_order import InMemoryOrderRepository
-import datetime
 
 
 class CreateOrder:
     def __init__(
         self: "CreateOrder",
         order_repo: InMemoryOrderRepository,
-        provider_adapter: ThirdPartyProviderAdapter,
+        provider_selector: third_party_provider_selector,
     ) -> None:
         self.order_repo = order_repo
-        self.provider_adapter = provider_adapter
+        self.provider_selector = provider_selector
 
-    def execute(
-        self: "CreateOrder",
-        provider: Provider,
-        original_amount: float,
-        tax_amount: float,
-        tax_percentage: float,
-        provider_id: str,
-        timestamp: datetime,
-    ) -> Order:
-        order = Order(
-            provider=provider,
-            original_amount=original_amount,
-            tax_amount=tax_amount,
-            tax_percentage=tax_percentage,
-            provider_id=provider_id,
-            timestamp=timestamp,
-        )
+    def execute(self: "CreateOrder", **kwargs: dict[any]) -> Order:
+        order = Order(**kwargs)
+        provider = self.provider_selector.get_provider()
+        order.provider = provider.name
         self.order_repo.add(order)
-        self.provider_adapter.send_order(order)
-        return order
+        updated_order = provider.create_payment(order)
+        self.order_repo.update(updated_order)
+        return updated_order

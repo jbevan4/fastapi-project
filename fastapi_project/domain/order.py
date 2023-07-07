@@ -1,7 +1,8 @@
 from enum import Enum
 from datetime import datetime
-from pydantic import BaseModel
-from uuid import UUID, uuid4
+from pydantic import BaseModel, Field
+from decimal import Decimal
+import uuid
 
 
 class Provider(str, Enum):
@@ -9,61 +10,32 @@ class Provider(str, Enum):
     checkout = "checkout"
 
 
-class Order:
-    def __init__(
-        self: "Order",
-        timestamp: datetime,
-        provider: Provider,
-        original_amount: float,
-        tax_amount: float,
-        tax_percentage: float,
-        provider_id: str,
-    ) -> None:
-        self.id = uuid4()
-        self.timestamp = timestamp
-        self.provider = provider
-        self.original_amount = original_amount
-        self.tax_amount = tax_amount
-        self.tax_percentage = tax_percentage
-        self.provider_id = provider_id
+class Country(str, Enum):
+    usa = "USA"
+    india = "India"
+    germany = "Germany"
+    australia = "Australia"
+    uk = "UK"
+
+
+class Status(str, Enum):
+    pending = "pending"
+    failed = "failed"
+    charged = "charged"
 
 
 # Then define your Pydantic models in terms of this Order class
 class OrderIn(BaseModel):
-    provider: Provider
-    original_amount: float
-    tax_amount: float
-    tax_percentage: float
-    provider_id: str
-
-    def to_order(self: "OrderIn") -> Order:
-        return Order(
-            self.timestamp,
-            self.provider,
-            self.original_amount,
-            self.tax_amount,
-            self.tax_percentage,
-            self.provider_id,
-        )
+    amount: Decimal
+    coutry_of_origin: Country
 
 
-class OrderOut(BaseModel):
-    id: UUID
-    timestamp: datetime
-    provider: Provider
-    original_amount: float
-    tax_amount: float
-    tax_percentage: float
-    provider_id: str
-
-    @staticmethod
-    def from_order(order: Order) -> "OrderOut":
-        return OrderOut(
-            id=order.id,
-            timestamp=order.timestamp,
-            provider=order.provider,
-            original_amount=order.original_amount,
-            tax_amount=order.tax_amount,
-            tax_percentage=order.tax_percentage,
-            provider_id=order.provider_id,
-        )
+class Order(OrderIn):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, alias="uuid")
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    provider_id: uuid.UUID | None
+    provider: Provider = Field(default=None)
+    status: Status = Field(default=Status.pending)
+    tax_amount: Decimal = Field(default=Decimal(0.0))
+    tax_percentage: Decimal = Field(default=Decimal(0.0))
+    final_amount_charged: Decimal = Field(default=Decimal(0.0))

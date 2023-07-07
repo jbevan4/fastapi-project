@@ -1,9 +1,7 @@
-from fastapi_project.domain.order import Order
+from abc import ABC, abstractmethod
 
 
-class ThirdPartyProviderAdapter:
-    def __init__(self: "ThirdPartyProviderAdapter") -> None:
-        pass
-
-    def send_order(self: "ThirdPartyProviderAdapter", order: Order) -> None:
+class ThirdPartyProviderABC(ABC):
+    @abstractmethod
+    def create_payment(self, order):
         pass
