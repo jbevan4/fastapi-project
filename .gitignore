@@ -116,3 +116,6 @@ cython_debug/
 # VS Code settings
 .vscode/
 
+# ruff cache
+.ruff_cache
+
