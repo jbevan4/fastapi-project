@@ -20,9 +20,16 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
-select = ["ALL"]
+select = ["E", "F", "ANN", "B"]
 fixable = ["ALL"]
 target-version = "py311"
+show-source = true
+ignore-init-module-imports = true
+src = ["fastapi_project", "tests"]
+
+[tool.ruff.isort]
+force-wrap-aliases = true
+combine-as-imports = true
 
 [tool.ruff.mccabe]
 max-complexity = 5

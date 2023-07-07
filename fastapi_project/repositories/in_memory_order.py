@@ -1,6 +1,6 @@
 class InMemoryOrderRepository:
-    def __init__(self):
+    def __init__(self: "InMemoryOrderRepository") -> None:
         self.orders = []
 
-    def add(self, order):
+    def add(self: "InMemoryOrderRepository", order):
         self.orders.append(order)
