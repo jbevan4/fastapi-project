@@ -1,6 +1,6 @@
-from .domain.order import Order, Provider
-from .adapters.third_party_provider import ThirdPartyProviderAdapter
-from .repositories.in_memory_order_repository import InMemoryOrderRepository
+from ..domain.order import Order, Provider
+from ..adapters.third_party_provider import ThirdPartyProviderAdapter
+from ..repositories.in_memory_order import InMemoryOrderRepository
 
 class CreateOrder:
     def __init__(self, order_repo: InMemoryOrderRepository, provider_adapter: ThirdPartyProviderAdapter):

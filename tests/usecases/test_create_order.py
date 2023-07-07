@@ -1,5 +1,5 @@
 import unittest
-from ..fastapi_project.domain.order import Order, Provider
+from fastapi_project.domain.order import Order, Provider
 
 class TestOrder(unittest.TestCase):
     def test_order_creation(self):
