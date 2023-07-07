@@ -18,3 +18,11 @@ ruff = "^0.0.277"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+select = ["ALL"]
+fixable = ["ALL"]
+target-version = "py311"
+
+[tool.ruff.mccabe]
+max-complexity = 5
