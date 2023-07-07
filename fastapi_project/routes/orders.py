@@ -1,10 +1,10 @@
-# fastapi_project/routes/orders.py
-
+from datetime import datetime
 from fastapi import APIRouter, Depends
 from fastapi_project.adapters.third_party_provider import ThirdPartyProviderAdapter
-from fastapi_project.domain.order import Order
+from fastapi_project.domain.order import OrderIn, OrderOut
 from fastapi_project.repositories.in_memory_order import InMemoryOrderRepository
 from fastapi_project.usecases.create_order import CreateOrder
+
 
 router = APIRouter()
 
@@ -26,12 +26,15 @@ def get_create_order_use_case(
 
 @router.post("/orders/")
 async def create_order_route(
-    order: Order, create_order: CreateOrder = Depends(get_create_order_use_case)
-) -> Order:
-    return create_order.execute(
-        order.provider,
-        order.original_amount,
-        order.tax_amount,
-        order.tax_percentage,
-        order.provider_id,
+    order: OrderIn, create_order: CreateOrder = Depends(get_create_order_use_case)
+) -> OrderOut:
+    return OrderOut.from_order(
+        create_order.execute(
+            order.provider,
+            order.original_amount,
+            order.tax_amount,
+            order.tax_percentage,
+            order.provider_id,
+            timestamp=datetime.now(),
+        )
     )
