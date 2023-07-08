@@ -7,11 +7,9 @@ class InMemoryOrderRepository:
         self.orders: List[Order] = []
 
     def add(self: "InMemoryOrderRepository", order: Order) -> None:
-        print(order)
         self.orders.append(order)
 
     def update(self: "InMemoryOrderRepository", order: Order) -> Order:
-        print(order)
         for i, o in enumerate(self.orders):
             if o.id == order.id:
                 self.orders[i] = order

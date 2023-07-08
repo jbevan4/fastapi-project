@@ -24,10 +24,9 @@ class Status(str, Enum):
     charged = "charged"
 
 
-# Then define your Pydantic models in terms of this Order class
 class OrderIn(BaseModel):
     amount: Decimal
-    coutry_of_origin: Country
+    country_of_origin: Country
 
 
 class Order(OrderIn):
