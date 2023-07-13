@@ -9,7 +9,7 @@ from uuid import uuid4
 def test_create_order() -> None:
     amount, country_of_origin = Decimal(10), Country.germany
     order_in = OrderIn(amount=amount, country_of_origin=country_of_origin)
-    order = OrderFactory().make_order(**order_in.dict())
+    order = OrderFactory().make_order(order_in=order_in)
     provider = MagicMock()
     in_memory_repository = MagicMock()
     provider_selector = MagicMock()
@@ -34,9 +34,9 @@ def test_create_order() -> None:
         order_factory=order_factory,
     )
 
-    result = create_order.execute(**order_in.dict())
+    result = create_order.execute(order_in=order_in)
 
-    order_factory.make_order.assert_called_with(**order_in.dict())
+    order_factory.make_order.assert_called_with(order_in=order_in)
     provider_selector.get_provider.assert_called_with(Country.germany)
     in_memory_repository.add.assert_called_with(order)
     in_memory_repository.update.assert_called_with(updated_order)

@@ -41,4 +41,4 @@ def get_create_order_use_case(
 async def create_order_route(
     order_in: OrderIn, create_order: CreateOrder = Depends(get_create_order_use_case)
 ) -> Order:
-    return create_order.execute(**order_in.dict())
+    return create_order.execute(order_in=order_in)

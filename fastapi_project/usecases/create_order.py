@@ -1,7 +1,7 @@
 from fastapi_project.adapters.third_party_provider_selector import (
     ThirdPartyProviderSelector,
 )
-from fastapi_project.domain.order import Order
+from fastapi_project.domain.order import Order, OrderIn
 from fastapi_project.domain.order_factory import OrderFactory
 from fastapi_project.repositories.in_memory_order import InMemoryOrderRepository
 from fastapi_project.adapters.third_party_provider import ThirdPartyProviderABC
@@ -18,8 +18,8 @@ class CreateOrder:
         self.provider_selector = provider_selector
         self.order_factory = order_factory
 
-    def execute(self: "CreateOrder", **kwargs: dict) -> Order:
-        order = self.order_factory.make_order(**kwargs)
+    def execute(self: "CreateOrder", order_in: OrderIn) -> Order:
+        order = self.order_factory.make_order(order_in=order_in)
         provider: ThirdPartyProviderABC = self.provider_selector.get_provider(
             order.country_of_origin
         )

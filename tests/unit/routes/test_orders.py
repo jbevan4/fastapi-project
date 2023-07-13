@@ -17,4 +17,4 @@ async def test_create_order_route_success() -> None:
     )
 
     assert response == create_order_mock.execute.return_value
-    create_order_mock.execute.assert_called_once_with(**order_in.dict())
+    create_order_mock.execute.assert_called_once_with(order_in=order_in)
