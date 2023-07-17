@@ -19,6 +19,6 @@ def test_create_order() -> None:
     now = datetime.utcnow()
     created_at = datetime.strptime(response_data["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
 
-    assert now - timedelta(seconds=10) <= created_at <= now + timedelta(seconds=10)
+    assert now - timedelta(seconds=5) <= created_at <= now + timedelta(seconds=10)
     assert response.status_code == 200
     assert response_data.get("status") == Status.charged
