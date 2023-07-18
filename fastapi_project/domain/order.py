@@ -1,8 +1,9 @@
 from enum import Enum
 from datetime import datetime
-from pydantic import BaseModel, Field
 from decimal import Decimal
 import uuid
+
+from sqlmodel import SQLModel, Field
 
 
 class Provider(str, Enum):
@@ -24,13 +25,13 @@ class Status(str, Enum):
     charged = "charged"
 
 
-class OrderIn(BaseModel):
+class OrderIn(SQLModel):
     amount: Decimal
     country_of_origin: Country
 
 
-class Order(OrderIn):
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, alias="uuid")
+class Order(OrderIn, table=True):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, alias="uuid", primary_key=True)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     provider_id: uuid.UUID | None
     provider: Provider = Field(default=None)
