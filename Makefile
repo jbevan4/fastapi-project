@@ -4,4 +4,4 @@ test:
 	poetry run pytest
 
 test-with-coverage:
-	poetry run pytest --cov=fastapi_project --cov-report xml
+	poetry run pytest --cov=fastapi_project --cov-report xml --cov-report html
