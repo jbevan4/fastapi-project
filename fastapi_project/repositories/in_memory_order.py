@@ -1,8 +1,9 @@
 from fastapi_project.domain.order import Order
+from fastapi_project.repositories.order import OrderRepository
 from typing import List
 
 
-class InMemoryOrderRepository:
+class InMemoryOrderRepository(OrderRepository):
     def __init__(self: "InMemoryOrderRepository") -> None:
         self.orders: List[Order] = []
 
