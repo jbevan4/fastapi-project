@@ -18,8 +18,7 @@ def test_add_order(db_client: MagicMock) -> None:
     order: Order = OrderFactory.make_order(order_in=order_in)
     repository.add(order)
 
-    # Assert that the appropriate method was called on the db_client
-    cursor = db_client.cursor.return_value  # Mock the cursor
+    cursor = db_client.cursor.return_value
     cursor.execute.assert_called_once_with(
         "INSERT INTO orders "
         "("
