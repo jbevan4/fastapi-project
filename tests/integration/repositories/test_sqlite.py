@@ -22,10 +22,10 @@ def test_db_session() -> Session:
     os.remove("test.db")
 
 
-def test_add_order(test_db_session: Session) -> None:
+def test_add_order(db_session: Session) -> None:
     order_in = OrderIn(amount=Decimal(10), country_of_origin=Country.australia)
     order: Order = OrderFactory.make_order(order_in=order_in)
-    repository = SQLiteOrderRepository(test_db_session)
+    repository = SQLiteOrderRepository(db_session)
     repository.add(order=order)
 
     # Query the database for the order
