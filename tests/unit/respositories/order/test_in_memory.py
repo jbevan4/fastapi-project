@@ -1,6 +1,6 @@
 import pytest
 from fastapi_project.domain.order import Order, Country, Status
-from fastapi_project.repositories.in_memory_order import InMemoryOrderRepository
+from fastapi_project.repositories.order.in_memory import InMemoryOrderRepository
 
 
 @pytest.fixture

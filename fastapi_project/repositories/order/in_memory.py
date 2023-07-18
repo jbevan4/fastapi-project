@@ -1,5 +1,5 @@
 from fastapi_project.domain.order import Order
-from fastapi_project.repositories.order import OrderRepository
+from fastapi_project.repositories.order.base import OrderRepository
 from typing import List
 
 
