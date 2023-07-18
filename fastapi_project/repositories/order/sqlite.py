@@ -23,9 +23,11 @@ class SQLiteOrderRepository(OrderRepository):
                 "provider_id,"
                 "provider,"
                 "status,"
-                "tax_amount"
+                "tax_amount,"
+                "tax_percentage,"
+                "final_amount_charged"
                 ")"
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 (
                     str(order.id),
                     order.amount,
@@ -35,26 +37,10 @@ class SQLiteOrderRepository(OrderRepository):
                     order.provider.value if order.provider else None,
                     order.status.value,
                     order.tax_amount,
+                    order.tax_percentage,
+                    order.final_amount_charged,
                 ),
             )
 
     def update(self: "SQLiteOrderRepository", order: Order) -> Order:
-        with self.db_client:
-            cursor = self.db_client.cursor()
-            cursor.execute(
-                "UPDATE orders "
-                "SET amount = ?,country_of_origin = ?,created_at = ?,provider_id = ?,"
-                "provider = ?,status = ?,tax_amount = ?"
-                "WHERE id = ?",
-                (
-                    order.amount,
-                    order.country_of_origin.value,
-                    order.created_at,
-                    str(order.provider_id) if order.provider_id else None,
-                    order.provider.value if order.provider else None,
-                    order.status.value,
-                    order.tax_amount,
-                    str(order.id),
-                ),
-            )
-        return order
+        pass

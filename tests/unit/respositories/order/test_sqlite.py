@@ -1,6 +1,8 @@
+from decimal import Decimal
 import pytest
 from unittest.mock import MagicMock
-from fastapi_project.domain.order import Order
+from fastapi_project.domain.order import Country, Order, OrderIn
+from fastapi_project.domain.order_factory import OrderFactory
 from fastapi_project.repositories.order.sqlite import SQLiteOrderRepository
 
 
@@ -11,36 +13,38 @@ def db_client() -> MagicMock:
 
 
 def test_add_order(db_client: MagicMock) -> None:
-    pytest.skip()
-    repository = SQLiteOrderRepository(db_path="", db_client=db_client)
-
-    # Create a test order
-    order = Order(
-        id="12345678-1234-5678-1234-567812345678",
-        amount=10.0,
-        country_of_origin="USA",
-        created_at="2022-01-01 12:00:00",
-        provider_id=None,
-        provider=None,
-        status="pending",
-        tax_amount=0.0,
-    )
-
-    # Call the add method
+    repository = SQLiteOrderRepository(db_client=db_client, db_path="")
+    order_in = OrderIn(country_of_origin=Country.usa, amount=Decimal(10))
+    order: Order = OrderFactory.make_order(order_in=order_in)
     repository.add(order)
 
     # Assert that the appropriate method was called on the db_client
-    db_client.execute.assert_called_once_with(
-        "INSERT INTO orders (id, amount, country_of_origin, created_at, provider_id, provider, status, tax_amount) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    cursor = db_client.cursor.return_value  # Mock the cursor
+    cursor.execute.assert_called_once_with(
+        "INSERT INTO orders "
+        "("
+        "id,"
+        "amount,"
+        "country_of_origin,"
+        "created_at,"
+        "provider_id,"
+        "provider,"
+        "status,"
+        "tax_amount,"
+        "tax_percentage,"
+        "final_amount_charged"
+        ")"
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (
-            "12345678-1234-5678-1234-567812345678",
-            10.0,
-            "USA",
-            "2022-01-01 12:00:00",
-            None,
-            None,
-            "pending",
-            0.0,
+            str(order.id),
+            order.amount,
+            order.country_of_origin.value,
+            order.created_at,
+            order.provider_id,
+            order.provider,
+            order.status.value,
+            order.tax_amount,
+            order.tax_percentage,
+            order.final_amount_charged,
         ),
     )
