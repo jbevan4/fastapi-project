@@ -1,10 +1,11 @@
+from decimal import Decimal
+
 import pytest
-from fastapi_project.domain.order import Status, OrderIn, Country
-from fastapi_project.domain.order_factory import OrderFactory
+from fastapi_project.adapters.checkout_provider import Checkout
 from fastapi_project.adapters.stripe_provider import Stripe
 from fastapi_project.adapters.third_party_provider import ThirdPartyProviderABC
-from fastapi_project.adapters.checkout_provider import Checkout
-from decimal import Decimal
+from fastapi_project.domain.order import Country, OrderIn, Status
+from fastapi_project.domain.order_factory import OrderFactory
 
 
 @pytest.mark.parametrize("provider_class", [(Checkout), (Stripe)])

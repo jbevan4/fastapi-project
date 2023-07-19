@@ -1,9 +1,9 @@
-from enum import Enum
+import uuid
 from datetime import datetime
 from decimal import Decimal
-import uuid
+from enum import Enum
 
-from sqlmodel import SQLModel, Field
+from sqlmodel import Field, SQLModel
 
 
 class Provider(str, Enum):

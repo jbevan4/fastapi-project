@@ -1,10 +1,11 @@
 from datetime import datetime, timedelta
 from decimal import Decimal
+from http import HTTPStatus
+
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from fastapi_project.routes.orders import router as orders_router
 from fastapi_project.domain.order import Country, OrderIn, Status
-from http import HTTPStatus
+from fastapi_project.routes.orders import router as orders_router
 
 app = FastAPI()
 app.include_router(orders_router)

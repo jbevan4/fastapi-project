@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends
+
 from fastapi_project.adapters.third_party_provider_selector import (
     ThirdPartyProviderSelector,
 )
-from fastapi_project.domain.order import OrderIn, Order
+from fastapi_project.domain.order import Order, OrderIn
 from fastapi_project.domain.order_factory import OrderFactory
 from fastapi_project.repositories.order.in_memory import InMemoryOrderRepository
 from fastapi_project.usecases.create_order import CreateOrder
-
 
 router = APIRouter()
 

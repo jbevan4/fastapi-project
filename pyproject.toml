@@ -27,7 +27,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
-select = ["E", "F", "ANN", "B"]
+select = ["E", "F", "ANN", "B", "I"]
 ignore = ["B008"]
 fixable = ["ALL"]
 target-version = "py311"

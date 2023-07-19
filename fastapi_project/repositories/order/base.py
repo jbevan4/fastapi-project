@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from fastapi_project.domain.order import Order
 
 

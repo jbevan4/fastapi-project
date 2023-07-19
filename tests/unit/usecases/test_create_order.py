@@ -1,9 +1,10 @@
 from decimal import Decimal
 from unittest.mock import MagicMock
-from fastapi_project.domain.order import Country, OrderIn, Status, Provider
+from uuid import uuid4
+
+from fastapi_project.domain.order import Country, OrderIn, Provider, Status
 from fastapi_project.domain.order_factory import OrderFactory
 from fastapi_project.usecases.create_order import CreateOrder
-from uuid import uuid4
 
 
 def test_create_order() -> None:

@@ -1,8 +1,9 @@
 from decimal import Decimal
 from unittest.mock import MagicMock
+
+import pytest
 from fastapi_project.domain.order import Country, OrderIn
 from fastapi_project.routes.orders import create_order_route
-import pytest
 
 
 @pytest.mark.asyncio

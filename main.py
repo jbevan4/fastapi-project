@@ -4,7 +4,6 @@ from fastapi_project.routes import (
     orders,
 )
 
-
 app = FastAPI()
 
 

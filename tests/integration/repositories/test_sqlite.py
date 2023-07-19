@@ -1,11 +1,11 @@
-from decimal import Decimal
-import pytest
-from sqlmodel import Session
 import os
-from fastapi_project.domain.order_factory import OrderFactory
-from sqlmodel import create_engine, SQLModel
+from decimal import Decimal
+
+import pytest
 from fastapi_project.domain.order import Country, Order, OrderIn
+from fastapi_project.domain.order_factory import OrderFactory
 from fastapi_project.repositories.order.sqlite import SQLiteOrderRepository
+from sqlmodel import Session, SQLModel, create_engine
 
 
 @pytest.fixture
