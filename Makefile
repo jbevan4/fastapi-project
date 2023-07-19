@@ -1,4 +1,4 @@
-.PHONY: test test-with-coverage open-html-coverage
+.PHONY: test test-with-coverage open-html-coverage ruff black
 
 test:
 	poetry run pytest
@@ -8,3 +8,12 @@ test-with-coverage:
 
 open-html-coverage:
 	open htmlcov/index.html
+
+ruff:
+	ruff . --fix
+
+black:
+	black .
+
+serve:
+	poetry run uvicorn main:app --reload
