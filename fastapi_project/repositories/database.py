@@ -1,10 +1,9 @@
-from sqlmodel import SQLModel, create_engine, Session
 from contextlib import contextmanager
+from sqlmodel import SQLModel, create_engine, Session
+from fastapi_project.config import Config
 
 
-sqlite_file = "testing.db"
-sqlite_url = f"sqlite:///{sqlite_file}"
-engine = create_engine(sqlite_url)
+engine = create_engine(Config.DATABASE_URL)
 
 
 def init_db() -> None:
@@ -12,7 +11,14 @@ def init_db() -> None:
 
 
 @contextmanager
-def get_session() -> Session:
-    session = Session(engine)
-    yield session
-    session.close()
+def get_session() -> None:
+    """Provide a transactional scope around a series of operations."""
+    session = Session(bind=engine)
+    try:
+        yield session
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close()

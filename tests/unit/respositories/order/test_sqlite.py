@@ -1,7 +1,7 @@
 from decimal import Decimal
 from unittest.mock import MagicMock
 import pytest
-from fastapi_project.domain.order import Country, Order, OrderIn
+from fastapi_project.domain.order import Country, OrderIn
 from fastapi_project.domain.order_factory import OrderFactory
 from fastapi_project.repositories.order.sqlite import SQLiteOrderRepository
 
@@ -20,4 +20,3 @@ def test_add_order(db_client: MagicMock) -> None:
     repository.add(order)
 
     db_client.add.assert_called_once_with(order)
-    db_client.commit.assert_called_once()

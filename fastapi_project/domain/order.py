@@ -3,7 +3,7 @@ from datetime import datetime
 from decimal import Decimal
 import uuid
 
-from sqlmodel import SQLModel, Field, create_engine
+from sqlmodel import SQLModel, Field
 
 
 class Provider(str, Enum):

@@ -9,7 +9,6 @@ class SQLiteOrderRepository(OrderRepository):
 
     def add(self: "SQLiteOrderRepository", order: Order) -> None:
         self.session.add(order)
-        self.session.commit()
 
     def update(self: "SQLiteOrderRepository", order: Order) -> Order:
         pass
