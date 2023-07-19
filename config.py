@@ -1,6 +1,6 @@
 import os
 
-from fastapi_project.repositories.factory import RepositoryType
+from fastapi_project.repositories.types import RepositoryType
 
 
 class Config:

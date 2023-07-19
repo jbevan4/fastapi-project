@@ -1,5 +1,4 @@
 import os
-from enum import Enum
 
 from config import Config
 from sqlmodel import Session, SQLModel, create_engine
@@ -15,7 +14,7 @@ def cleanup_db() -> None:
     os.remove(Config.DATABASE_NAME)
 
 
-def get_session() -> None:
+def get_session() -> Session:
     session = Session(bind=engine)
     try:
         yield session

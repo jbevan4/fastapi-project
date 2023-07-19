@@ -5,7 +5,7 @@ from fastapi_project.repositories.order.base import OrderRepository
 
 
 class InMemoryOrderRepository(OrderRepository):
-    def __init__(self: "InMemoryOrderRepository") -> None:
+    def __init__(self: "InMemoryOrderRepository", **_: dict) -> None:
         self.orders: List[Order] = []
 
     def add(self: "InMemoryOrderRepository", order: Order) -> None:

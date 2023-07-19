@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from fastapi_project.domain.order import Country, OrderIn, Status
 from fastapi_project.repositories.database import cleanup_db, init_db
-from fastapi_project.repositories.factory import RepositoryType
+from fastapi_project.repositories.types import RepositoryType
 from fastapi_project.routes.orders import router as orders_router
 
 
