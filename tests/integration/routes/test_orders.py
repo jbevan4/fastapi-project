@@ -13,26 +13,23 @@ from fastapi_project.routes.orders import router as orders_router
 
 
 @pytest.fixture
-def test_client_with_memory_db() -> None:
-    Config.REPOSITORY_TYPE = RepositoryType.IN_MEMORY
+def test_client() -> TestClient:
     app = FastAPI()
     app.include_router(orders_router)
-    yield TestClient(app)
+    return TestClient(app)
 
 
 @pytest.fixture
-def test_client_with_sqlite_db() -> None:
-    Config.REPOSITORY_TYPE = RepositoryType.SQLITE
-    app = FastAPI()
-    app.include_router(orders_router)
+def sqlite_db() -> None:
     init_db()
-    yield TestClient(app)
+    yield
     cleanup_db()
 
 
-def test_create_order_with_in_memory_db(test_client_with_memory_db: TestClient) -> None:
+def test_create_order_with_in_memory_db(test_client: TestClient) -> None:
+    # IN_MEMORY is the default database provided
     order_in: OrderIn = OrderIn(amount=Decimal(10), country_of_origin=Country.uk)
-    response = test_client_with_memory_db.post("/orders/", content=order_in.json())
+    response = test_client.post("/orders/", content=order_in.json())
     response_data = response.json()
 
     now = datetime.utcnow()
@@ -43,10 +40,10 @@ def test_create_order_with_in_memory_db(test_client_with_memory_db: TestClient) 
     assert response_data.get("status") == Status.charged
 
 
-def test_create_order_with_sqlite_db(test_client_with_sqlite_db: TestClient) -> None:
+def test_create_order_with_sqlite_db(test_client: TestClient) -> None:
     order_in: OrderIn = OrderIn(amount=Decimal(10), country_of_origin=Country.uk)
 
-    response = test_client_with_sqlite_db.post("/orders/", content=order_in.json())
+    response = test_client.post("/orders/", content=order_in.json())
     response_data = response.json()
 
     now = datetime.utcnow()
