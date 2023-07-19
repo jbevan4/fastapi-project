@@ -1,4 +1,4 @@
-.PHONY: test test-with-coverage open-html-coverage ruff black
+.PHONY: test test-with-coverage open-html-coverage lint format
 
 test:
 	poetry run pytest
@@ -9,10 +9,10 @@ test-with-coverage:
 open-html-coverage:
 	open htmlcov/index.html
 
-ruff:
+lint:
 	ruff . --fix
 
-black:
+format:
 	black .
 
 serve:

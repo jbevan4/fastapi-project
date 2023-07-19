@@ -1,10 +1,10 @@
+from config import Config
 from fastapi import APIRouter, Depends
 from sqlmodel import Session
 
 from fastapi_project.adapters.third_party_provider_selector import (
     ThirdPartyProviderSelector,
 )
-from fastapi_project.config import Config
 from fastapi_project.domain.order import Order, OrderIn
 from fastapi_project.domain.order_factory import OrderFactory
 from fastapi_project.repositories.database import get_session

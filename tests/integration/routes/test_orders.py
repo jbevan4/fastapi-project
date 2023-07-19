@@ -2,9 +2,9 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 from http import HTTPStatus
 
+from config import Config
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from fastapi_project.config import Config
 from fastapi_project.domain.order import Country, OrderIn, Status
 from fastapi_project.routes.orders import router as orders_router
 
