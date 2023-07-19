@@ -1,4 +1,5 @@
 import os
+from enum import Enum
 
 from config import Config
 from sqlmodel import Session, SQLModel, create_engine
