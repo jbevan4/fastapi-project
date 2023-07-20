@@ -31,7 +31,7 @@ class OrderIn(SQLModel):
 
 
 class Order(OrderIn, table=True):
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, alias="uuid", primary_key=True)
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     provider_id: uuid.UUID | None
     provider: Provider = Field(default=None)
