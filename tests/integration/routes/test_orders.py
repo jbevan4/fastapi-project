@@ -33,7 +33,9 @@ def in_memory_db() -> None:
     return
 
 
-def test_create_order_with_in_memory_db(test_client: TestClient, in_memory_db) -> None:
+def test_create_order_with_in_memory_db(
+    test_client: TestClient, in_memory_db  # noqa: ANN001
+) -> None:
     # IN_MEMORY is the default database provided
     order_in: OrderIn = OrderIn(amount=Decimal(10), country_of_origin=Country.uk)
     response = test_client.post("/orders/", content=order_in.json())
@@ -47,7 +49,9 @@ def test_create_order_with_in_memory_db(test_client: TestClient, in_memory_db) -
     assert response_data.get("status") == Status.charged
 
 
-def test_create_order_with_sqlite_db(test_client: TestClient, sqlite_db) -> None:
+def test_create_order_with_sqlite_db(
+    test_client: TestClient, sqlite_db  # noqa: ANN001
+) -> None:
     order_in: OrderIn = OrderIn(amount=Decimal(10), country_of_origin=Country.uk)
 
     response = test_client.post("/orders/", content=order_in.json())
