@@ -5,7 +5,7 @@ from fastapi_project.adapters.third_party_provider import ThirdPartyProviderABC
 from fastapi_project.adapters.third_party_provider_selector import (
     ThirdPartyProviderSelector,
 )
-from fastapi_project.domain.order import Country, Provider
+from fastapi_project.domain.order.order import Country, Provider
 
 
 @pytest.mark.parametrize(

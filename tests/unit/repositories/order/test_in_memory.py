@@ -1,5 +1,5 @@
 import pytest
-from fastapi_project.domain.order import Country, Order, Status
+from fastapi_project.domain.order.order import Country, Order, Status
 from fastapi_project.repositories.order.in_memory import InMemoryOrderRepository
 
 

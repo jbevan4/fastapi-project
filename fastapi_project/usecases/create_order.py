@@ -2,8 +2,8 @@ from fastapi_project.adapters.third_party_provider import ThirdPartyProviderABC
 from fastapi_project.adapters.third_party_provider_selector import (
     ThirdPartyProviderSelector,
 )
-from fastapi_project.domain.order import Order, OrderIn
-from fastapi_project.domain.order_factory import OrderFactory
+from fastapi_project.domain.order.order import Order, OrderIn
+from fastapi_project.domain.order.order_factory import OrderFactory
 from fastapi_project.repositories.order.in_memory import InMemoryOrderRepository
 
 

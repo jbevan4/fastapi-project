@@ -1,4 +1,4 @@
-from fastapi_project.domain.order import Order, OrderIn
+from fastapi_project.domain.order.order import Order, OrderIn
 
 
 class OrderFactory:

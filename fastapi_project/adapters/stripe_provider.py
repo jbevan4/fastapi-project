@@ -2,7 +2,7 @@ from decimal import Decimal
 from uuid import uuid4
 
 from fastapi_project.adapters.third_party_provider import ThirdPartyProviderABC
-from fastapi_project.domain.order import Order, Provider, Status
+from fastapi_project.domain.order.order import Order, Provider, Status
 
 
 class Stripe(ThirdPartyProviderABC):

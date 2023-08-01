@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from fastapi_project.domain.order import Order
+from fastapi_project.domain.order.order import Order
 
 
 class ThirdPartyProviderABC(ABC):

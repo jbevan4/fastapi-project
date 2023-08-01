@@ -1,7 +1,7 @@
 from fastapi_project.adapters.checkout_provider import Checkout
 from fastapi_project.adapters.stripe_provider import Stripe
 from fastapi_project.adapters.third_party_provider import ThirdPartyProviderABC
-from fastapi_project.domain.order import Country
+from fastapi_project.domain.order.order import Country
 
 
 class ThirdPartyProviderSelector:

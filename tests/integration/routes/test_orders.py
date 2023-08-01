@@ -5,7 +5,7 @@ from http import HTTPStatus
 import pytest
 from config import Config
 from fastapi.testclient import TestClient
-from fastapi_project.domain.order import Country, Order, OrderIn, Status
+from fastapi_project.domain.order.order import Country, Order, OrderIn, Status
 from fastapi_project.repositories.database import get_session
 from fastapi_project.repositories.types import RepositoryType
 from main import app

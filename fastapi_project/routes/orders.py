@@ -5,8 +5,8 @@ from sqlmodel import Session
 from fastapi_project.adapters.third_party_provider_selector import (
     ThirdPartyProviderSelector,
 )
-from fastapi_project.domain.order import Order, OrderIn
-from fastapi_project.domain.order_factory import OrderFactory
+from fastapi_project.domain.order.order import Order, OrderIn
+from fastapi_project.domain.order.order_factory import OrderFactory
 from fastapi_project.repositories.database import get_session
 from fastapi_project.repositories.factory import OrderRepositoryFactory
 from fastapi_project.repositories.order.base import OrderRepository

@@ -2,8 +2,8 @@ from decimal import Decimal
 from unittest.mock import MagicMock
 
 import pytest
-from fastapi_project.domain.order import Country, OrderIn
-from fastapi_project.domain.order_factory import OrderFactory
+from fastapi_project.domain.order.order import Country, OrderIn
+from fastapi_project.domain.order.order_factory import OrderFactory
 from fastapi_project.repositories.order.sqlite import SQLiteOrderRepository
 
 

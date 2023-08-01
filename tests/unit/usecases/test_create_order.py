@@ -2,8 +2,8 @@ from decimal import Decimal
 from unittest.mock import MagicMock
 from uuid import uuid4
 
-from fastapi_project.domain.order import Country, OrderIn, Provider, Status
-from fastapi_project.domain.order_factory import OrderFactory
+from fastapi_project.domain.order.order import Country, OrderIn, Provider, Status
+from fastapi_project.domain.order.order_factory import OrderFactory
 from fastapi_project.usecases.create_order import CreateOrder
 
 
