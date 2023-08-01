@@ -1,4 +1,6 @@
 # .gitignore for Python projects
+# venv
+.venv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
